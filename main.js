@@ -81,3 +81,15 @@ function clearAllTasks(evt) {
         taskList.removeChild(taskList.firstChild);
     }
 }
+
+function filterTasks(evt) {
+    const filterText = filterTaskInput.value.toLowerCase();
+    document.querySelectorAll('.collection-item').forEach(function(taskElem) {
+        const taskElemText = taskElem.firstChild.textContent.toLowerCase();
+        if (taskElemText.indexOf(filterText) == -1) {
+            taskElem.style.display = 'none';
+        } else {
+            taskElem.style.display = 'block';
+        }
+    })
+}
