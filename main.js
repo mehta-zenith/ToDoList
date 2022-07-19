@@ -14,7 +14,7 @@ function loadEvents() {
     document.addEventListener('DOMContentLoaded', loadTasksFromStroage);
     taskForm.addEventListener('submit', addTask);
     taskList.addEventListener('click', removeTask);
-    clearAllTaskBtn.addEventListener('click', clearTasks);
+    clearAllTaskBtn.addEventListener('click', clearAllTasks);
     filterTaskInput.addEventListener('keyup', filterTasks);
 }
 
@@ -26,8 +26,8 @@ function initializeModals(evt) {
 
 function loadTasksFromStroage(evt) {
     const loadTasksFromStroage = JSON.parse(localStorage.getItem('tasks'));
-    if (tasksFromStorage !== null) {
-        tasksFromStorage.forEach(function(task) {
+    if (loadtasksFromStorage !== null) {
+        loadtasksFromStorage.forEach(function(task) {
             createTaskElement(task);
         });
     }
@@ -92,4 +92,22 @@ function filterTasks(evt) {
             taskElem.style.display = 'block';
         }
     })
+}
+
+// helper functions
+
+function createTaskElement(taskName) {
+    const li = document.createElement('li');
+    const link = document.createElement('a');
+
+    li.className = 'collection-item';
+    li.textContent = taskName;
+
+    link.setAttribute('href', '#');
+    link.className = 'secondary-content delete-item';
+    link.innerHTML = '<i class=\'material-icons\'>delete</i>';
+
+    li.appendChild(link);
+
+    taskList.appendChild(li);
 }
